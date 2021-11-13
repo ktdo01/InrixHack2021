@@ -5,6 +5,7 @@
     "lerna": "^3.13.0"
   },
   "dependencies": {
+    "express": "^4.17.1",
     "firebase": "^9.4.1"
   }
 }
