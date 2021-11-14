@@ -53,9 +53,19 @@ console.log(history.location)
         </button>
       </form>
       { shortcut ? (
-        <div>
-          <Link to="/map">In-N-Out</Link>
+        <div className = "search-response-container">
+          <div className = "search-response">
+            <Link to="/map" >In-N-Out</Link>
+          </div>
+          <div className = "search-response">
+            <Link to="/map">Chik-Fil-A</Link>
+          </div>
+          <div className = "search-response">
+            <Link to="/map">McDonald's</Link>
+          </div>
         </div>
+
+
       ) : <></> }
     </div>
   );

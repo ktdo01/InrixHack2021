@@ -79,6 +79,24 @@ input[type="text"]{
   width: 70%;
 }
 
+.search-response-container {
+  border: 6px solid #2B2B45;
+  border-radius: 30px;
+  font-size: 1.5em;
+  padding: 0.25em;
+  margin-left: 5px;
+  width: 90%;
+  height: 100%;
+}
+
+.search-response a {
+  margin-left: 1em;
+  text-decoration: none;
+  color: #2B2B45;
+  font-size: 1.25em;
+}
+
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
