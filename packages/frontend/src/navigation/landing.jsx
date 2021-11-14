@@ -14,14 +14,14 @@ export default () => {
 
   return (
     <div>
-      <div class = "Divider">
+      <div className="Divider">
         <img src={process.env.PUBLIC_URL + "/Nodes and Divider.svg"} width="60%" />
         <img src={process.env.PUBLIC_URL + "/Person.svg"} width="20%" />
       </div>
 
       <br></br>
 
-      <div class = "Tagline">
+      <div className="Tagline">
         <h1>Find </h1>
         <h1>drivethru </h1>
         <h1>food fast.</h1>
