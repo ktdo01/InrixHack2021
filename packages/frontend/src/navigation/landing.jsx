@@ -14,12 +14,28 @@ export default () => {
 
   return (
     <div>
-      <img src={process.env.PUBLIC_URL + "/nodes.svg"} width="60%" />
-      <h1>Find drive thru food fast.</h1>
-      <form>
-        <input type="text" value={search} onChange={(e) => { e.preventDefault(); setSearch(e.target.value)}} />
-        <Link to={"/search?q=" + search}>Find</Link>
-      </form>
+      <div class = "Divider">
+        <img src={process.env.PUBLIC_URL + "/Nodes and Divider.svg"} width="60%" />
+        <img src={process.env.PUBLIC_URL + "/Person.svg"} width="20%" />
+      </div>
+
+      <br></br>
+
+      <div class = "Tagline">
+        <h1>Find </h1>
+        <h1>drivethru </h1>
+        <h1>food fast.</h1>
+      </div>
+    
+      <div class = "Dynamic-Searchbar">
+          
+          <input type="text" value={search} onChange={(e) => { e.preventDefault(); setSearch(e.target.value)}} />
+          <Link to={"/search?query=" + search}>
+            <img src={process.env.PUBLIC_URL + "/SearchButton.svg"}/>
+          </Link>
+
+      </div>
+      
     </div>
   );
 }
