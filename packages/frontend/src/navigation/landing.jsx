@@ -15,15 +15,15 @@ export default () => {
   return (
     <div>
       <div class = "Divider">
-        <img src={process.env.PUBLIC_URL + "/Nodes and Divider.svg"} width="60%" />
+        <img src={process.env.PUBLIC_URL + "/nodes-and-divider.svg"} width="60%" />
         <img src={process.env.PUBLIC_URL + "/Person.svg"} width="20%" />
       </div>
 
       <br></br>
 
-      <div class = "Tagline">
+      <div className="Tagline">
         <h1>Find </h1>
-        <h1>drivethru </h1>
+        <h1>drive-thru </h1>
         <h1>food fast.</h1>
       </div>
     

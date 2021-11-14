@@ -24,7 +24,6 @@ export default (props) => {
   // the query string for you.
   function useQuery() {
     const { search } = useLocation();
-
     return React.useMemo(() => new URLSearchParams(search), [search]);
   }
   let query = useQuery();
@@ -35,14 +34,12 @@ export default (props) => {
     e.preventDefault();
     let path = createPath({ pathname: '/search', search: '?q=' + search });
     // history.push(path);
-    await cx.get("/hi").then((res) => {
-      console.log(res);
-    });
+    
     setShortcut(true);
   }
 
   React.useEffect(() => {
-    setSearch()
+    setSearch(history.location.search)
   }, []);
 
 console.log(history.location)
@@ -57,7 +54,7 @@ console.log(history.location)
       </form>
       { shortcut ? (
         <div>
-          <Link to="/maps">In-N-Out</Link>
+          <Link to="/map">In-N-Out</Link>
         </div>
       ) : <></> }
     </div>
