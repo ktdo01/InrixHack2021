@@ -27,14 +27,14 @@ export default () => {
         <h1>food fast.</h1>
       </div>
     
-      <div class = "Dynamic-Searchbar">
-          
-          <input type="text" value={search} onChange={(e) => { e.preventDefault(); setSearch(e.target.value)}} />
-          <Link to={"/search?query=" + search}>
-            <img src={process.env.PUBLIC_URL + "/SearchButton.svg"}/>
+      
+      <form style={{display: "flex", alignItems: "center"}}>
+          <input type="text" color = "#2B2B45" className="search-bar" value={search} onChange={(e) => { e.preventDefault(); setSearch(e.target.value)}} />
+          <Link to={"/search?q=" + search}>
+            <img src={process.env.PUBLIC_URL + "/icons/search.svg"} />
           </Link>
-
-      </div>
+      </form>
+    
       
     </div>
   );
