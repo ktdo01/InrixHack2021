@@ -48,18 +48,7 @@ export default (props) => {
 console.log(history.location)
   return (
     <div>
-      
-      <form style={{display: "flex", alignItems: "center"}} onSubmit={handleSearch}>
-        <input type="text" className="search-bar" placeholder="Search for restaurant" value={search} onChange={(e) => {e.preventDefault(); setSearch(e.target.value)}} />
-        <button type="submit" style={{background: "none", border: "none"}}>
-          <img src={process.env.PUBLIC_URL + "/icons/search.svg"} />
-        </button>
-      </form>
-      { shortcut ? (
-        <div>
-          <Link to="/maps">In-N-Out</Link>
-        </div>
-      ) : <></> }
+      Map!
     </div>
   );
 }

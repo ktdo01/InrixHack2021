@@ -8,6 +8,7 @@ import {
 } from "react-router-dom";
 import Landing from "./navigation/landing";
 import Search from './navigation/Search';
+import Map from "./navigation/Map";
 
 // ... or just import the browser history singleton instance.
 import history from 'history/browser';
@@ -34,6 +35,7 @@ export default function App() {
         <Routes>
           <Route path="/" element={ <Landing />} />
           <Route path="/search" element={ <Search />} />
+          <Route path="/map" element={ <Map />} />
 
           {/* <Route path="/" element={<Home />} /> */}
         </Routes>
