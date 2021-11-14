@@ -7,30 +7,23 @@ import {
   Link
 } from "react-router-dom";
 import Landing from "./navigation/landing";
+import Search from './navigation/Search';
 
 export default function App() {
   return (
 <Router>
       <div>
         <nav>
-          <ul>
-            <li>
-              <Link to="/">Landing</Link>
-            </li>
-            <li>
-              <Link to="/about"></Link>
-            </li>
-            <li>
-              <Link to="/users">Users</Link>
-            </li>
-          </ul>
+          <Link to="/">Landing</Link>
+          <Link to="/search?name=fdsa">Search</Link>
+          <Link to="/users">Users</Link>
         </nav>
 
         {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
         <Routes>
           <Route path="/" element={ <Landing />} />
-          <Route path="/about" element={ <About />} />
+          <Route path="/search" element={ <Search />} />
 
           {/* <Route path="/" element={<Home />} /> */}
         </Routes>

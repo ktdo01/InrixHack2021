@@ -1,6 +1,11 @@
 import './../App.css';
 import React from "react";
-
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Link
+} from "react-router-dom";
 // import NodesImg from "./nodes.svg";
 
 
@@ -13,7 +18,7 @@ export default () => {
       <h1>Find drive thru food fast.</h1>
       <form>
         <input type="text" value={search} onChange={(e) => { e.preventDefault(); setSearch(e.target.value)}} />
-        <input type="submit" />
+        <Link to={"/search?query=" + search}>Find</Link>
       </form>
     </div>
   );
