@@ -28,6 +28,7 @@ export default () => {
       </div>
     
       <div class = "Dynamic-Searchbar">
+          
           <input type="text" value={search} onChange={(e) => { e.preventDefault(); setSearch(e.target.value)}} />
           <Link to={"/search?query=" + search}>
             <img src={process.env.PUBLIC_URL + "/SearchButton.svg"}/>

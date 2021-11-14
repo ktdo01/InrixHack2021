@@ -9,13 +9,23 @@ import {
 import Landing from "./navigation/landing";
 import Search from './navigation/Search';
 
+// ... or just import the browser history singleton instance.
+import history from 'history/browser';
+// Alternatively, if you're using hash history import
+// the hash history singleton instance.
+// import history from 'history/hash';
+// Get the current location.
+let location = history.location;
+
+
 export default function App() {
+  // console.log(location)
   return (
-<Router>
+<Router history={history}>
       <div>
         <nav>
           <Link to="/">Landing</Link>
-          <Link to="/search?name=fdsa">Search</Link>
+          <Link to="/search?q=In-N">Search</Link>
           <Link to="/users">Users</Link>
         </nav>
 

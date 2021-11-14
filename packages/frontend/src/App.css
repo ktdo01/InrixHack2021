@@ -70,6 +70,13 @@ input[type="text"]{
   color: #2B2B45;
 }
 
+.search-bar {
+  border: 3px solid #333;
+  border-radius: 100px;
+  font-size: 1.5em;
+  padding: 1em;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
