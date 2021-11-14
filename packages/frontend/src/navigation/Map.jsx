@@ -13,11 +13,24 @@ import {createPath} from "history";
 import cx from './../utils/axios';
 import GoogleMapReact from 'google-map-react';
 
-const AnyReactComponent = ({ label, wait }) => <Link to="" style={{textDecoration: "none"}}><div style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}><img width="35px" height="35px" src={process.env.PUBLIC_URL + "/icons/Green.svg"} /><span style={{background: "white", padding: "0.3em", borderRadius: 8, fontSize: "1.4em", color: '#000',}}>{label}</span></div></Link>;
+const Pin = ({ label, wait }) => {
+const colorFiles = ["Green.svg", "Yellow.svg", "Red.svg", "Gray.svg"];
+return (
+  <Link to="" style={{textDecoration: "none"}}>
+    <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
+      <img width="35px" height="35px" src={process.env.PUBLIC_URL + "/icons/" + colorFiles[(wait < 4 && wait > -1) ? wait : 3]} />
+      <span style={{background: "white", padding: "0.3em", borderRadius: 8, fontSize: "1.4em", color: '#000',}}>
+        {label}
+      </span>
+    </div>
+  </Link>
+);
+}
 
 
 export default (props) => {
   const [search, setSearch] = useState();
+  const [locations, setLocations] = useState([]);
   const defaultProps = {
     center: {
       lat: 37.7749,
@@ -25,7 +38,7 @@ export default (props) => {
     },
     zoom: 13
   };
-  const locations = [
+  const locations2 = [
     {
       lat: 37.777,
       lng: -122.40,
@@ -44,16 +57,16 @@ export default (props) => {
     (async () => {
       await handleLoadSearch();
     })();
-  }, history.location.params)
+  }, [history.location.params])
 
   const handleLoadSearch = async () => {
-    await cx.get("/searchLocations", {
+    const { data } = await cx.get("/searchLocations", {
       params: {
         foo: 'bar'
       }
-    }).then((res) => {
-      console.log(res);
-    }).catch(e => console.log(e))
+    }).catch(e => console.log(e));
+    console.log(data)
+    setLocations(data);
   }
 //process.env.GOOGLE_MAPS_API_KEY
   return (
@@ -72,12 +85,8 @@ export default (props) => {
         defaultCenter={defaultProps.center}
         defaultZoom={defaultProps.zoom}
       >
-        {locations.map((pin, i) => <AnyReactComponent key={i} lat={pin.lat} lng={pin.lng} text={pin.label} wait={pin.wait} />)}
-        <AnyReactComponent
-          lat={37.7749}
-          lng={-122.4194}
-          text="Here!"
-        />
+        {locations.length > 0 ? locations.map((pin, i) => <Pin key={i} lat={pin.lat} lng={pin.lng} label={pin.label} wait={pin.wait} />) : <></>}
+
       </GoogleMapReact>
     </div>
     </div>
