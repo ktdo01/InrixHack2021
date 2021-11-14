@@ -1,6 +1,5 @@
 //Call function to start program
 
-
 var latlongreturn = latitudeLongitude();
 var datereturn = dateWalkThru();
 
