@@ -94,7 +94,13 @@ export default (props) => {
           <img src={process.env.PUBLIC_URL + "/icons/search.svg"} />
         </button>
       </form>
-      
+      {shortcut ? (
+        <div>
+          <Link to="/map">Map</Link>
+        </div>
+      ) : (
+        <></>
+      )}
       <ul>
         {businesses
           ? businesses.map((business, i) => {
