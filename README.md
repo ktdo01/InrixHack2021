@@ -1,2 +1,2 @@
 # InrixHack2021
-Inrix Hackathon 2021 event
+A WebApp that shows the predicted wait time at a drive-thru using Inrix's API. 
