@@ -1,13 +1,14 @@
 import express, { application } from 'express';
 import fetch from 'node-fetch';
 let app = express()
+import cors from "cors";
 
-app.use(function(req, res, next) {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
-    res.header('Access-Control-Allow-Methods', 'PUT, POST, GET, DELETE, OPTIONS');
-    next();
-});
+app.use(cors()) // Use this after the variable declaration
+
+app.get("/api/hi", (req, res) => {
+    res.json({hello: "hi"});
+})
+
 
 app.get("/hi", (req, res) => {
     res.json({hello: "hi"});

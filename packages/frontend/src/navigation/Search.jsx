@@ -34,7 +34,7 @@ export default (props) => {
     e.preventDefault();
     let path = createPath({ pathname: '/search', search: '?q=' + search });
     history.push(path);
-    await cx.get("/test").then((res) => {
+    await cx.get("/hi").then((res) => {
       console.log(res);
     })
   }
