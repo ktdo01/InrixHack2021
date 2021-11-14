@@ -7,30 +7,35 @@ import {
   Link
 } from "react-router-dom";
 import Landing from "./navigation/landing";
+import Search from './navigation/Search';
+import Map from "./navigation/Map";
+
+// ... or just import the browser history singleton instance.
+import history from 'history/browser';
+// Alternatively, if you're using hash history import
+// the hash history singleton instance.
+// import history from 'history/hash';
+// Get the current location.
+let location = history.location;
+
 
 export default function App() {
+  // console.log(location)
   return (
-<Router>
+<Router history={history}>
       <div>
         <nav>
-          <ul>
-            <li>
-              <Link to="/">Landing</Link>
-            </li>
-            <li>
-              <Link to="/about"></Link>
-            </li>
-            <li>
-              <Link to="/users">Users</Link>
-            </li>
-          </ul>
+          <Link to="/">Landing</Link>
+          <Link to="/search?q=In-N">Search</Link>
+          <Link to="/users">Users</Link>
         </nav>
 
         {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
         <Routes>
           <Route path="/" element={ <Landing />} />
-          <Route path="/about" element={ <About />} />
+          <Route path="/search" element={ <Search />} />
+          <Route path="/map" element={ <Map />} />
 
           {/* <Route path="/" element={<Home />} /> */}
         </Routes>
