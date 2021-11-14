@@ -28,6 +28,45 @@
   color: #61dafb;
 }
 
+.Tagline {
+  /* Find drivethru food fast. */
+  position: absolute;
+  width: 381px;
+  height: 249px;
+  left: 19px;
+  top: 260px;
+
+  font-family: Ubuntu;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 72px;
+  line-height: 83px;
+
+  color: #2B2B45;
+}
+
+.Search-results-box {
+  /* Results */
+  position: relative;
+  width: 357px;
+  height: 737px;
+}
+
+.Dynamic-Searchbar {
+  /* search */
+  /* Auto Layout */
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  padding: 0px;
+
+  position: absolute;
+  width: 387px;
+  height: 77px;
+  left: 27px;
+  top: 34px;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
