@@ -18,7 +18,7 @@ export default () => {
       <h1>Find drive thru food fast.</h1>
       <form>
         <input type="text" value={search} onChange={(e) => { e.preventDefault(); setSearch(e.target.value)}} />
-        <Link to={"/search?query=" + search}>Find</Link>
+        <Link to={"/search?q=" + search}>Find</Link>
       </form>
     </div>
   );

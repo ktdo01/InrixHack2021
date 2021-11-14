@@ -8,7 +8,10 @@ import {
   useParams,
   useLocation,
 } from "react-router-dom";
-// import NodesImg from "./nodes.svg";
+import history from 'history/browser';
+import {createPath} from "history";
+import axios from 'axios';
+import cx from './../utils/axios';
 
 // Props:
 // IProps: {
@@ -17,16 +20,7 @@ import {
 
 
 export default (props) => {
-  const [search, setSearch] = React.useState("");
-  let params = useParams();
-
-
-  React.useEffect(() => {
-
-    setSearch(props.query)
-  }, []);
-
-  // A custom hook that builds on useLocation to parse
+    // A custom hook that builds on useLocation to parse
   // the query string for you.
   function useQuery() {
     const { search } = useLocation();
@@ -34,14 +28,30 @@ export default (props) => {
     return React.useMemo(() => new URLSearchParams(search), [search]);
   }
   let query = useQuery();
+  const [search, setSearch] = React.useState(query.get("q"));
+
+  const handleSearch = async (e) => {
+    e.preventDefault();
+    let path = createPath({ pathname: '/search', search: '?q=' + search });
+    history.push(path);
+    await cx.get("/test").then((res) => {
+      console.log(res);
+    })
+  }
+
+  React.useEffect(() => {
+    setSearch()
+  }, []);
+
+console.log(history.location)
   return (
     <div>
-      <img src={process.env.PUBLIC_URL + "/nodes.svg"} width="60%" />
-      <h1>Search</h1>
-      <p>Topic: {query.get("query")}</p>
-      <form>
-        <input type="text" value={search} onChange={(e) => { e.preventDefault(); setSearch(e.target.value)}} />
-        <input type="submit" />
+      
+      <form style={{display: "flex", alignItems: "center"}} onSubmit={handleSearch}>
+        <input type="text" className="search-bar" placeholder="Search for restaurant" value={search} onChange={(e) => {e.preventDefault(); setSearch(e.target.value)}} />
+        <button type="submit" style={{background: "none", border: "none"}}>
+          <img src={process.env.PUBLIC_URL + "/icons/search.svg"} />
+        </button>
       </form>
     </div>
   );
