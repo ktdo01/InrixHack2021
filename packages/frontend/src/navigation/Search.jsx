@@ -95,13 +95,6 @@ export default (props) => {
         </button>
       </form>
       
-      {shortcut ? (
-        <div>
-          <Link to="/map">In-N-Out</Link>
-        </div>
-      ) : (
-        <></>
-      )}
       <ul>
         {businesses
           ? businesses.map((business, i) => {
