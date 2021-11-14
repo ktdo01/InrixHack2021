@@ -71,10 +71,11 @@ input[type="text"]{
 }
 
 .search-bar {
-  border: 3px solid #333;
+  border: 3px solid #2B2B45;
   border-radius: 100px;
   font-size: 1.5em;
   padding: 1em;
+  width: 70%;
 }
 
 @keyframes App-logo-spin {
