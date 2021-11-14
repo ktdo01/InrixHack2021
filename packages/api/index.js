@@ -23,7 +23,7 @@ async function getTrips() {
 app.get('/', async (req, res) => {
   var countTotal = 0;
   var date = ['2020-12-09','2020-12-02','2020-11-25','2020-11-18']
-  for(var i = 0; i < 2; i++){
+  for(var i = 0; i < 4; i++){
     var curDate = date[i]
     const trip = await getTrips(curDate)
     trip = parseFloat(trip)
