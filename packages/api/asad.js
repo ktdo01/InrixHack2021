@@ -52,13 +52,14 @@ app.get("/searchLocations", (req, res) => {
 })
 
 app.get("/business", (req, res) => {
-    if (req.query) {
+    if (req.query && req.query.search) {
         const YELP_API_KEY="nPiTvSFqYi04YozQEyr96yJ3ntGRiRpwSqlGG_fymuBON_lsRIaY1GPgULzC7Nh2zjTUA-5k2Ekj2H-07RoIn56aNc8icx_0_MyFOIoaZMmA5CmvJt_kVM7gcaOQYXYx";
         const yelpCli = yelp.client(YELP_API_KEY);
-
         yelpCli.search({
         term: req.query.search,
         location: 'san francisco, ca',
+        categories: "food",
+        radius: 15000,
         }).then(response => {
         res.json(response.jsonBody.businesses);
         }).catch(e => {
@@ -68,13 +69,14 @@ app.get("/business", (req, res) => {
 })
 
 app.get("/suggestion", (req, res) => {
-    if (req.query) {
+    if (req.query && req.query.search) {
         const YELP_API_KEY="nPiTvSFqYi04YozQEyr96yJ3ntGRiRpwSqlGG_fymuBON_lsRIaY1GPgULzC7Nh2zjTUA-5k2Ekj2H-07RoIn56aNc8icx_0_MyFOIoaZMmA5CmvJt_kVM7gcaOQYXYx";
         const yelpCli = yelp.client(YELP_API_KEY);
         
         yelpCli.autocomplete({
             text: req.query.search,
             location: 'san francisco, ca',
+            categories: "food",
           }).then(response => {
             res.json(response.jsonBody.terms);
             console.log(response.jsonBody.terms[0].text);

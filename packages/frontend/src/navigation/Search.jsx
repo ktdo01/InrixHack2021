@@ -105,7 +105,7 @@ export default (props) => {
       <ul>
         {businesses
           ? businesses.map((business, i) => {
-              return <li key={i}><Link to={"/map?lat=" + business.coordinates.latitude + "&lng=" + business.coordinates.longitude + "&q=" + business.name}>{business.name ? business.name : null}</Link></li>;
+              return <li key={i}><Link to={encodeURI("/map?lat=" + business.coordinates.latitude + "&lng=" + business.coordinates.longitude + "&q=" + business.name)}>{business.name ? business.name : null}</Link></li>;
             })
           : null}
       </ul>

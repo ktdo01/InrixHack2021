@@ -32,14 +32,18 @@ export default (props) => {
   let query = useQuery();
 
   const [center, setCenter] = useState([37.75571, -122.39812]);
-  const [search, setSearch] = useState();
+  const [search, setSearch] = useState("");
   const [locations, setLocations] = useState([]);
 
   useEffect(() => {
+    console.log(query.get("q"))
+    if (query.get("q")) {
+      setSearch(query.get("q"));
+    }
     setCenter({ lat: query.get("lat"), lng: query.get("lng") })
    
     console.log("lat" + query.get("lat") + " lng: " + query.get("lng"))
-  }, [history.location.search]);
+  }, []);
 
   const defaultProps = {
       center: {
@@ -63,28 +67,30 @@ export default (props) => {
     }
   ];
 
+
   useEffect(() => {
     (async () => {
-      setSearch(query.get("q"))
-      await handleLoadSearch();
-    })();
-  }, [history.location.params])
+      await cx
+      .get("/business", { params: { search } })
+      .then((res) => {
+        console.log(res);
+        if (res.data) {
+          console.log(res.data)
+          
+          setLocations(res.data.map((d, i) => ({...d, wait: Math.floor(Math.random() * (4))})))
+        }
+      })
+      .catch(console.log);
+    })()
+  }, [search])
 
-  const handleLoadSearch = async () => {
-    const { data } = await cx.get("/searchLocations", {
-      params: {
-        foo: 'bar'
-      }
-    }).catch(e => console.log(e));
-    console.log(data)
-    setLocations(data);
-  }
+
 //process.env.GOOGLE_MAPS_API_KEY
   return (
     // Important! Always set the container height explicitly
     <div>
       <div style={{position: 'absolute', top: '2em', left: '2em', width: '80%', zIndex: 100}}>
-        <input type="text" className="search-bar" onChange={e => { e.preventDefault(); setSearch(e.target.value)}} />
+        <input type="text" value={search} className="search-bar" onChange={e => { e.preventDefault(); setSearch(e.target.value)}} />
         <Link style={{position: "relative", top: 15, left: 10}} to={"/search?q=" + search}>
             <img src={process.env.PUBLIC_URL + "/icons/Search2.svg"} />
           </Link>
@@ -97,7 +103,7 @@ export default (props) => {
         defaultZoom={defaultProps.zoom}
         // center={center}
       >
-        {locations.length > 0 ? locations.map((pin, i) => <Pin key={i} lat={pin.lat} lng={pin.lng} label={pin.label} wait={pin.wait} />) : <></>}
+        {locations.length > 0 ? locations.map((pin, i) => pin.coordinates ? <Pin key={i} lat={pin.coordinates.latitude} lng={pin.coordinates.longitude} label={pin.name} wait={pin.wait} /> : null) : <></>}
 
       </GoogleMapReact>
     </div>

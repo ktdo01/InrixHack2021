@@ -24,11 +24,11 @@ export default function App() {
   return (
 <Router history={history}>
       <div>
-        <nav>
+        {/* <nav>
           <Link to="/">Landing</Link>
           <Link to="/search?q=In-N">Search</Link>
           <Link to="/users">Users</Link>
-        </nav>
+        </nav> */}
 
         {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
