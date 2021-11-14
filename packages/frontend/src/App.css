@@ -1,3 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@700&display=swap');
+
+body {
+  font-family: Ubuntu;
+  font-weight: bold;
+}
+
 .App {
   text-align: center;
 }
@@ -30,41 +37,37 @@
 
 .Tagline {
   /* Find drivethru food fast. */
-  position: absolute;
-  width: 381px;
-  height: 249px;
-  left: 19px;
-  top: 260px;
+  position: relative;
 
   font-family: Ubuntu;
   font-style: normal;
   font-weight: bold;
-  font-size: 72px;
-  line-height: 83px;
+  
+  font-size: 8vw;
+  line-height: 8vw;
 
   color: #2B2B45;
-}
 
-.Search-results-box {
-  /* Results */
-  position: relative;
-  width: 357px;
-  height: 737px;
+  display: inline-block;
 }
 
 .Dynamic-Searchbar {
   /* search */
-  /* Auto Layout */
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  padding: 0px;
+  size: 100%;
+  border: 5px black;
+  border-radius: 10px;
+}
 
-  position: absolute;
-  width: 387px;
-  height: 77px;
-  left: 27px;
-  top: 34px;
+.Divider {
+  
+  position: relative;
+}
+
+input[type="text"]{
+  font-family: Ubuntu;
+  font-weight: bold;
+  font-size: 36px;
+  color: #2B2B45;
 }
 
 @keyframes App-logo-spin {
