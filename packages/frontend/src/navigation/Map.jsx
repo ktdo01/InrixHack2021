@@ -91,14 +91,14 @@ export default (props) => {
       if (selectedPin === 1) {
         return (
           <>
-          <h1>A good pin</h1>
+          <h1>Current wait time: 5 minutes</h1>
           </>
         );
       }
       else {
         return (
           <>
-          <h1>A bad wait time for a pin</h1>
+          <h1>Current wait time: 20 minutes</h1>
           </>
         );
       }      
