@@ -1,11 +1,7 @@
 import "./../App.css";
 import React from "react";
 import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
   Link,
-  useParams,
   useLocation,
 } from "react-router-dom";
 import history from "history/browser";
@@ -15,12 +11,10 @@ import cx from "./../utils/axios";
 
 // Props:
 // IProps: {
-//    query: String;
+//    query: String; // Deprecated!
 // }
 
 export default (props) => {
-  // A custom hook that builds on useLocation to parse
-  // the query string for you.
   function useQuery() {
     const { search } = useLocation();
     return React.useMemo(() => new URLSearchParams(search), [search]);
@@ -33,6 +27,9 @@ export default (props) => {
 
   const handleChangeInput = async (e) => {
     setSearch(e.target.value);
+    if (e.target.value.length === 0) {
+      return setSuggestions([]);
+    }
     let path = createPath({ pathname: "/search", search: encodeURI("?q=" +  e.target.value) });
     history.push(path);
     await cx
@@ -83,13 +80,15 @@ export default (props) => {
               handleChangeInput(e)
             }}
           />
-          <select style={{ width: '60%', border: '3px solid black', borderBottomLeftRadius: 30, borderBottomRightRadius: 30}}>
-          {suggestions
-            ? suggestions.map((suggestion, i) => {
-                return suggestion.text ? <option onClick={() => { setSearch(suggestion.text); handleSearch(); }} key={i}>{suggestion.text}</option> : null;
-              })
-            : null}
-          </select>
+          
+        {suggestions && suggestions.length !== 0
+          ? <fieldset style={{ position: 'relative', top: -5, left: '2em', fontSize: '1.3em', width: '55%', border: '3px solid #2B2B45', borderBottomLeftRadius: 30, borderBottomRightRadius: 30}}>
+            {suggestions.map((suggestion, i) => {
+              return suggestion.text ? <div className="hover-me"><input type='radio' name={"suggestion"} style={{padding:'0.5em', display: 'none' }} onClick={() => { setSearch(suggestion.text); handleSearch(); }} key={i} id={"suggestion-" + i} /><label className="hover-me" htmlFor={"suggestion-" + i}>{suggestion.text}</label></div> : null;
+            })}
+            </fieldset>
+          : null}
+
         </div>
         <button type="submit" style={{ background: "none", border: "none" }}>
           <img src={process.env.PUBLIC_URL + "/icons/search.svg"} />
@@ -106,7 +105,7 @@ export default (props) => {
       <ul>
         {businesses
           ? businesses.map((business, i) => {
-              return <li key={i}>{business.name ? business.name : null}</li>;
+              return <li key={i}><Link to={"/map?lat=" + business.coordinates.latitude + "&lng=" + business.coordinates.longitude + "&q=" + business.name}>{business.name ? business.name : null}</Link></li>;
             })
           : null}
       </ul>

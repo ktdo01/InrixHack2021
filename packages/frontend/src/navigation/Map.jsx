@@ -1,17 +1,13 @@
 import './../App.css';
 import React, { useEffect, useState} from "react";
 import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
   Link,
-  useParams,
   useLocation,
 } from "react-router-dom";
 import history from 'history/browser';
-import {createPath} from "history";
 import cx from './../utils/axios';
 import GoogleMapReact from 'google-map-react';
+
 
 const Pin = ({ label, wait }) => {
 const colorFiles = ["Green.svg", "Yellow.svg", "Red.svg", "Gray.svg"];
@@ -29,15 +25,29 @@ return (
 
 
 export default (props) => {
+  function useQuery() {
+    const { search } = useLocation();
+    return React.useMemo(() => new URLSearchParams(search), [search]);
+  }
+  let query = useQuery();
+
+  const [center, setCenter] = useState([37.75571, -122.39812]);
   const [search, setSearch] = useState();
   const [locations, setLocations] = useState([]);
+
+  useEffect(() => {
+    setCenter({ lat: query.get("lat"), lng: query.get("lng") })
+   
+    console.log("lat" + query.get("lat") + " lng: " + query.get("lng"))
+  }, [history.location.search]);
+
   const defaultProps = {
-    center: {
-      lat: 37.7749,
-      lng: -122.4194,
-    },
-    zoom: 13
-  };
+      center: {
+        lat: 37.75571,
+        lng: -122.39812,
+      },
+      zoom: 13
+    };
   const locations2 = [
     {
       lat: 37.777,
@@ -55,6 +65,7 @@ export default (props) => {
 
   useEffect(() => {
     (async () => {
+      setSearch(query.get("q"))
       await handleLoadSearch();
     })();
   }, [history.location.params])
@@ -84,6 +95,7 @@ export default (props) => {
         bootstrapURLKeys={{ key: 'AIzaSyD6Fp2ae4kiqwff7Igw5o5htmSx_W_ZpFY' }}
         defaultCenter={defaultProps.center}
         defaultZoom={defaultProps.zoom}
+        // center={center}
       >
         {locations.length > 0 ? locations.map((pin, i) => <Pin key={i} lat={pin.lat} lng={pin.lng} label={pin.label} wait={pin.wait} />) : <></>}
 
