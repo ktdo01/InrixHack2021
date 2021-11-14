@@ -21,7 +21,7 @@ export default () => {
 
       <br></br>
 
-      <div class = "Tagline">
+      <div className="Tagline">
         <h1>Find </h1>
         <h1>drive-thru </h1>
         <h1>food fast.</h1>
