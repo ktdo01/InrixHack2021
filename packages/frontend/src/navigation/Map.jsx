@@ -9,12 +9,12 @@ import cx from './../utils/axios';
 import GoogleMapReact from 'google-map-react';
 
 
-const Pin = ({ label, wait }) => {
+const Pin = ({ label, wait, setSelectedPin }) => {
 const colorFiles = ["Green.svg", "Yellow.svg", "Red.svg", "Gray.svg"];
 return (
-  <Link to="" style={{textDecoration: "none"}}>
+  <Link to="" onClick={() => setSelectedPin(wait)} style={{textDecoration: "none"}}>
     <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
-      <img width="35px" height="35px" src={process.env.PUBLIC_URL + "/icons/" + colorFiles[(wait < 4 && wait > -1) ? wait : 3]} />
+      <img width="35px" height="35px" src={process.env.PUBLIC_URL + "/icons/" + colorFiles[(wait-1 < 4 && wait-1 > -1) ? wait-1 : 3]} />
       <span style={{background: "white", padding: "0.3em", borderRadius: 8, fontSize: "1.4em", color: '#000',}}>
         {label}
       </span>
@@ -34,6 +34,7 @@ export default (props) => {
   const [center, setCenter] = useState([37.75571, -122.39812]);
   const [search, setSearch] = useState("");
   const [locations, setLocations] = useState([]);
+  const [selectedPin, setSelectedPin] = useState();
 
   useEffect(() => {
     console.log(query.get("q"))
@@ -77,7 +78,7 @@ export default (props) => {
         if (res.data) {
           console.log(res.data)
           
-          setLocations(res.data.map((d, i) => ({...d, wait: Math.floor(Math.random() * (4))})))
+          setLocations(res.data.map((d, i) => ({...d, wait: Math.floor(Math.random() * (4) + 1)})))
         }
       })
       .catch(console.log);
@@ -85,6 +86,24 @@ export default (props) => {
   }, [search])
 
 
+  const showPin = () => {
+    if (selectedPin) {
+      if (selectedPin === 1) {
+        return (
+          <>
+          <h1>A good pin</h1>
+          </>
+        );
+      }
+      else {
+        return (
+          <>
+          <h1>A bad wait time for a pin</h1>
+          </>
+        );
+      }      
+    }
+  }
 //process.env.GOOGLE_MAPS_API_KEY
   return (
     // Important! Always set the container height explicitly
@@ -103,10 +122,11 @@ export default (props) => {
         defaultZoom={defaultProps.zoom}
         // center={center}
       >
-        {locations.length > 0 ? locations.map((pin, i) => pin.coordinates ? <Pin key={i} lat={pin.coordinates.latitude} lng={pin.coordinates.longitude} label={pin.name} wait={pin.wait} /> : null) : <></>}
+        {locations.length > 0 ? locations.map((pin, i) => pin.coordinates ? <Pin key={i} setSelectedPin={setSelectedPin} lat={pin.coordinates.latitude} lng={pin.coordinates.longitude} label={pin.name} wait={pin.wait} /> : null) : <></>}
 
       </GoogleMapReact>
     </div>
+    {selectedPin ? <div style={{position:'fixed', bottom: 0, left: 0, zIndex: 100, width: '100%', height: '23%', background: 'hsla(0,0%,100%,0.85'}}>{showPin()}</div> : null}
     </div>
   );
 }
